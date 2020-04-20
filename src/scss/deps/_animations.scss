@@ -1,0 +1,105 @@
+// Animation classes
+// ----------------------------------------------
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadein-up {
+  0% {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floating {
+  0% {
+    transform: translatey(0%);
+  }
+  50% {
+    transform: translatey(-20%);
+  }
+  100% {
+    transform: translatey(0%);
+  }
+}
+
+@include b(anim) {
+  @include e(target) {
+  }
+
+  // Subtle card turn on hover
+  // ex: .grid-x.anim--turn .cell.anim__target
+  @include m(turn) {
+    perspective: rem-calc(900px);
+    // transform: perspective( rem-calc(900px) );
+
+    @include e(target) {
+      transform-origin: bottom left;
+      transform-style: preserve-3d;
+      transition: 600ms;
+
+      &:hover {
+        transform: rotateX(5deg) rotateY(-8deg);
+      }
+    }
+  }
+
+  // Waypoint triggered fade in
+  @include m(fadein-up) {
+    @include e(target) {
+      @include breakpoint(medium up) {
+        opacity: 0;
+        transform: translateY(2rem);
+        animation-duration: 450ms;
+        animation-fill-mode: forwards;
+
+        @at-root .anim#{&} {
+          animation-name: fadein-up;
+        }
+      }
+    }
+  }
+
+  @include m(fadein) {
+    @include e(target) {
+      @include breakpoint(medium up) {
+        opacity: 0;
+        animation-duration: 350ms;
+        animation-fill-mode: forwards;
+
+        @at-root .anim#{&} {
+          animation-name: fadein;
+        }
+      }
+    }
+  }
+}
+
+// Animation delays in steps of 100ms.
+// ex: .anim-delay--5 (500ms)
+@include b(anim-delay) {
+  $anim-delay-step: 100;
+  @for $i from 0 through 20 {
+    @include m("#{$i * $anim-delay-step}") {
+      animation-delay: $i * $anim-delay-step * 1ms;
+    }
+  }
+}
+
+// Convenience
+.trans-orig--tl {
+  transform-origin: top left !important;
+}
+.trans-orig--tr {
+  transform-origin: top right !important;
+}

@@ -1,0 +1,44 @@
+/*=Sidebar
+---------------------------------------------------------------------*/
+.sidebar {
+  margin-top: 3rem;
+  @include breakpoint(large) {
+    margin-top: 0;
+  }
+  ul {
+    list-style: none;
+  }
+}
+
+.widget {
+  margin-bottom: 3rem;
+
+  li {
+    margin-bottom: 0.5rem;
+  }
+
+  a:hover {
+    font-weight: 700;
+  }
+}
+
+.widget_recent_entries {
+  color: $primary;
+  border-top: 5px solid $primary;
+  padding-top: 0.5rem;
+}
+
+.widget_categories {
+  color: $secondary;
+  border-top: 5px solid $secondary;
+  padding-top: 0.5rem;
+
+  a {
+    color: $secondary;
+  }
+
+  a:before {
+    content: "#";
+    margin-right: 5px;
+  }
+}

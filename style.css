@@ -1,0 +1,18 @@
+/*
+    Theme Name: Steven Stromick
+    Theme URI: https://github.com/sstromick/steven-stromick-theme
+    Description: StevenStromick.com theme
+    Author: Steven Stromick
+    Author URI: https://stevenstromick.com/
+*/
+
+/**
+ * Theme is compiled from scss under /assets/scss/_theme.scss
+ *
+ * theme.css under /assets/css is the main compiled file
+ * which can be edited BUT will be overwritten once it
+ * gets compiled again.
+ *
+ * Use the custom.css file in the themes root directory
+ * if you are not using a workflow that compiles scss.
+ */

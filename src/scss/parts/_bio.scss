@@ -1,0 +1,34 @@
+@include b(bio) {
+  margin-bottom: 3rem;
+  display: none;
+
+  @include breakpoint(large) {
+    display: block;
+  }
+
+  @include m(small) {
+    display: block;
+    text-align: center;
+    width: 75%;
+    margin: 2rem auto;
+
+    @include breakpoint(large) {
+      display: none;
+    }
+  }
+
+  @include e(stack) {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    color: #717184;
+    margin-top: 1.2rem;
+    justify-content: center;
+  }
+  @include e(stack-item) {
+    font-size: 1rem;
+    margin-right: 10px;
+  }
+}

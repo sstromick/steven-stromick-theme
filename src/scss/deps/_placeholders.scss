@@ -1,0 +1,61 @@
+// Placeholders
+// ----------------------------------------------
+
+%absolute-position {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+%absolute-position--pseudo {
+  @extend %absolute-position;
+  content: "";
+}
+
+// Flex layout centered
+%flex-center {
+  @include flex;
+  @include flex-align(center, middle);
+}
+
+// Vertical center with flex-direction is column
+%flex-middle {
+  @include flex;
+  @include flex-align(center, middle);
+  @include flex-direction(column);
+}
+
+// Center an absolutely positioned element.
+%absolute-position-center {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+// Fonts
+// Fontawesome+ pseudo element base
+%fa-pseudo-base {
+  display: inline-block;
+  font-family: "fontawesome";
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+// === Images
+// Object fit for images, video etc
+// ex. object-fit.object-fit--contain
+%object-fit--cover {
+  @include object-fit(cover);
+}
+%object-fit--contain {
+  @include object-fit(contain);
+}
+%object-fit--fill {
+  @include object-fit(fill);
+}
+%object-fit--pos-top {
+  @include object-fit(cover, top);
+}

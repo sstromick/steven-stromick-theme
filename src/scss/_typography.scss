@@ -1,0 +1,84 @@
+/*=Typography
+---------------------------------------------------------------------*/
+
+/**
+ * Header font sizes are set under the foundation settings. This can be
+ * used to overwrite those or for any additional typography styles.
+ */
+
+// ex: .font--my-adobe-font.font-weight--7.font-style--italic
+@include b(font) {
+  @include m(Nunito) {
+    font-family: "Nunito", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+  }
+}
+
+// Font weights - size run 1 - 9 (for 100 - 900)
+// ex: font-weight--4 ~ font-weight: 400;
+@include b(font-weight) {
+  @for $i from 1 through 9 {
+    @include m(#{$i}) {
+      font-weight: $i * 100;
+    }
+  }
+}
+
+// Font Styles
+// ex: font-style--italic
+@include b(font-style) {
+  @each $font-style in normal italic oblique {
+    @include m(#{$font-style}) {
+      font-style: $font-style;
+    }
+  }
+}
+
+// Link Styles
+// ex: link--textgray-primary
+@include b(link) {
+  $link-pairs: (
+    primary: (
+      secondary,
+    ),
+  );
+
+  @each $link-color, $hover-colors in $link-pairs {
+    @each $hover-color in $hover-colors {
+      // Create link of form .link--[color]-[hover]
+      @include m(#{$link-color}-#{$hover-color}) {
+        @include link(get-color($link-color), get-color($hover-color));
+      }
+
+      // Create reverse - so .link--[hover]-[color]
+      // @include m(#{$hover}-#{$color}) {
+      // 	@include link($hover, $color);
+      // }
+    }
+  }
+}
+
+// Some custom extras
+h1 > strong {
+  font-weight: 900;
+}
+h1 sub {
+  bottom: 0;
+  font-size: 0.5em;
+  font-weight: 500;
+}
+h2,
+h3,
+h4,
+h5,
+h6 {
+  > strong {
+    font-weight: 900;
+  }
+}
+
+p > strong {
+  font-weight: 700;
+}
+// .font--poppins > strong {font-weight: 700}

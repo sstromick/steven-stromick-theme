@@ -1,0 +1,37 @@
+/*=Blog
+---------------------------------------------------------------------*/
+.page-nav {
+  display: flex;
+  justify-content: center;
+}
+
+.post-nav-link {
+  font-size: 1.8rem;
+}
+
+@include b(post) {
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid $dark-gray;
+  margin-bottom: 2rem;
+
+  @include m(single) {
+    border: none;
+    margin-bottom: 0;
+    padding: 0 2rem;
+  }
+
+  @include e(title) {
+    display: block;
+    margin-top: 2rem;
+    color: $black;
+
+    @include breakpoint(medium) {
+      margin-top: 0;
+    }
+  }
+}
+
+@include b(comments-area) {
+  padding: 0 2rem;
+  margin-top: 2rem;
+}

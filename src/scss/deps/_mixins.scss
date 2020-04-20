@@ -1,0 +1,278 @@
+// Fonts
+// ----------------------------------------------
+
+// Order of the includes matters, and it is: normal, bold, italic, bold+italic.
+@mixin font-face(
+  $font-family,
+  $file-path,
+  $weight: normal,
+  $style: normal,
+  $asset-pipeline: false
+) {
+  @font-face {
+    font-family: quote($font-family);
+
+    @if $asset-pipeline == true {
+      src: font-url("#{$file-path}.eot");
+      src: font-url("#{$file-path}.eot?#iefix") format("embedded-opentype"),
+        font-url("#{$file-path}.woff") format("woff"),
+        font-url("#{$file-path}.ttf") format("truetype"),
+        font-url("#{$file-path}.svg##{$font-family}") format("svg");
+    } @else {
+      src: url("#{$file-path}.eot");
+      src: url("#{$file-path}.eot?#iefix") format("embedded-opentype"),
+        url("#{$file-path}.woff") format("woff"),
+        url("#{$file-path}.ttf") format("truetype"),
+        url("#{$file-path}.svg##{$font-family}") format("svg");
+    }
+    font-weight: $weight;
+    font-style: $style;
+  }
+}
+
+// Input placeholder
+@mixin placeholder {
+  &::-webkit-input-placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+  }
+  &::-moz-placeholder {
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+}
+
+// line-height - divide desired line-height by font-size
+@mixin line-height(
+  $line-height: $base-line-height,
+  $font-size: $base-font-size
+) {
+  line-height: $line-height / $font-size;
+}
+
+@mixin margin-bottom(
+  $line-height: $base-line-height,
+  $font-size: $base-font-size
+) {
+  margin-bottom: $line-height / $font-size + em;
+}
+
+// Vertical rhythm - combines font-size, line-height, and margin-bottom
+@mixin vertical-rhythm(
+  $line-height: $base-line-height,
+  $font-size: $base-font-size,
+  $margin-divide: 2
+) {
+  font-size: #{$font-size}px;
+  font-size: #{$font-size / 10}rem;
+  line-height: $line-height / $font-size;
+  margin-bottom: ($line-height / $font-size) / $margin-divide + em;
+}
+
+// Helpers
+// ----------------------------------------------
+
+// Image replacement
+@mixin ir {
+  overflow: hidden;
+  border: 0;
+  background-color: transparent;
+  *text-indent: -9999px;
+
+  &:before {
+    display: block;
+    width: 0;
+    height: 150%;
+    content: "";
+  }
+}
+
+// Center align block element
+@mixin center {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@mixin text-overflow {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin circle {
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+@mixin vertical-align {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+// Spacing - margins and padding.
+@mixin spacing(
+  $spacing-type: padding,
+  $step-size: 0.75,
+  $step-num: 16,
+  $base-unit: 1rem
+) {
+  $prefix: p;
+  @if margin == $spacing-type {
+    $prefix: m;
+  }
+
+  @for $i from 0 through $step-num {
+    // Affect single side
+    // ex: .mb-4
+    @each $pos in top right bottom left {
+      .#{$prefix}#{str-slice($pos, 1, 1)}-#{$i} {
+        #{$spacing-type}-#{$pos}: ($i * $step-size * $base-unit);
+      }
+    }
+    // Affect x-axis sides
+    // ex: .mx-4
+    .#{$prefix}x-#{$i} {
+      @extend .#{$prefix}l-#{$i};
+      @extend .#{$prefix}r-#{$i};
+    }
+    // Affect y-axis sides
+    // ex: .py-2
+    .#{$prefix}y-#{$i} {
+      @extend .#{$prefix}t-#{$i};
+      @extend .#{$prefix}b-#{$i};
+    }
+    // Affect sides
+    // ex: .p-0
+    .#{$prefix}-#{$i} {
+      @extend .#{$prefix}x-#{$i};
+      @extend .#{$prefix}y-#{$i};
+    }
+  }
+}
+
+@mixin borders($widths: 5, $style: solid) {
+  $prefix: b;
+  @for $i from 0 through $widths {
+    // Affect single side
+    // ex: .bb-4
+    @each $pos in top right bottom left {
+      .#{$prefix}#{str-slice($pos, 1, 1)}-#{$i} {
+        border-#{$pos}: ($i * 1px) #{$style};
+      }
+    }
+    // Affect x-axis sides
+    // ex: .bx-4
+    .#{$prefix}x-#{$i} {
+      @extend .#{$prefix}l-#{$i};
+      @extend .#{$prefix}r-#{$i};
+    }
+    // Affect y-axis sides
+    // ex: .by-2
+    .#{$prefix}y-#{$i} {
+      @extend .#{$prefix}t-#{$i};
+      @extend .#{$prefix}b-#{$i};
+    }
+    // Affect sides
+    // ex: .b-0
+    .#{$prefix}-#{$i} {
+      @extend .#{$prefix}x-#{$i};
+      @extend .#{$prefix}y-#{$i};
+    }
+  }
+
+  // Border colors for all palettes
+  // ex: b-secondary, b-medium-gray
+  @each $color in primary secondary tertiary quaternary sun-pearl whisper-gray {
+    @if (has-color($color)) {
+      .#{$prefix}-#{$color} {
+        border-color: get-color($color);
+      }
+    }
+  }
+
+  // Some gray shades
+  .#{$prefix}-light-gray {
+    border-color: $light-gray;
+  }
+  .#{$prefix}-medium-gray {
+    border-color: $medium-gray;
+  }
+  .#{$prefix}-dark-gray {
+    border-color: $dark-gray;
+  }
+}
+
+// Create arange of .width-n convenience classes. The percentage (%) class does not show a unit.
+// ex: .width-40 (40%), .width-5x25em (5.25em), .width-22x5 (22.5%)
+@mixin widths($limit: 100, $step: 1, $unit: "%") {
+  $prefix: width;
+  @for $i from 1 through $limit {
+    $real-value: ($i * $step);
+    $selector-value: str-replace("#{$real-value}", ".", "x");
+    @if ("%" == $unit) {
+      .#{$prefix}-#{$selector-value} {
+        width: $real-value#{$unit};
+      }
+    } @else {
+      .#{$prefix}-#{$selector-value}#{$unit} {
+        width: $real-value#{$unit};
+      }
+    }
+  }
+}
+
+// Set the object-fit with bfred-it/object-fit-images
+// @include object-fit(contain), @include object-fit(cover, top) etc
+// @see _placeholders/@images
+@mixin object-fit($fit: fill, $position: null) {
+  -o-object-fit: $fit;
+  object-fit: $fit;
+
+  @if $position {
+    -o-object-position: $position;
+    object-position: $position;
+    font-family: "object-fit: #{$fit}; object-position: #{$position}";
+  } @else {
+    font-family: "object-fit: #{$fit}";
+  }
+}
+
+@mixin button-group(
+  $color: secondary,
+  $inactive-color: secondary,
+  $border-width: 2px
+) {
+  $group-color: get-color($color);
+  color: $group-color;
+  border: $border-width solid $group-color;
+
+  > .button {
+    background-color: transparent;
+    color: get-color($inactive-color);
+    &:hover {
+      color: #fff;
+    }
+    &.is-active {
+      background-color: $group-color;
+      color: #fff;
+    }
+  }
+}
+
+// Simple link
+@mixin link($link-color, $hover-color) {
+  color: $link-color;
+  &:hover {
+    color: $hover-color;
+  }
+}

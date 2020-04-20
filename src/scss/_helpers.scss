@@ -1,0 +1,662 @@
+/*=Helper Classes
+---------------------------------------------------------------------*/
+
+.group {
+  @extend .clearfix;
+}
+
+// image replacement
+.ir {
+  @include ir();
+}
+
+// hide from both screenreaders and browsers: h5bp.com/u
+.hidden {
+  @extend .hide;
+}
+
+// hide only visually, but have it available for screenreaders: h5bp.com/v
+.visuallyhidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  margin: -1px;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  border: 0;
+}
+
+// allow the element to be focusable when navigated to via the keyboard: h5bp.com/p
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+  position: static;
+  overflow: visible;
+  clip: auto;
+  margin: 0;
+  width: auto;
+  height: auto;
+}
+
+.object-top {
+  object-position: top;
+}
+
+// Shadows used with multiple parts of site
+.small-shadow {
+  box-shadow: rem-calc(-5 5 15) rgba(0, 0, 0, 0.1);
+}
+
+.medium-shadow {
+  box-shadow: rem-calc(20 20 40) rgba(0, 0, 0, 0.05);
+}
+
+.large-shadow {
+  box-shadow: rem-calc(-20 20 60) rgba(0, 0, 0, 0.15);
+}
+
+.large-shadow-shifted {
+  box-shadow: rem-calc(20 20 60) rgba(0, 0, 0, 0.1);
+}
+
+.large-shadow-shifted-dark {
+  box-shadow: rem-calc(20 20 60) rgba(0, 0, 0, 0.4);
+}
+
+.posts-shadow {
+  box-shadow: rem-calc(-15 15 45) rgba(0, 0, 0, 0.16);
+}
+
+.list-style-none {
+  list-style-type: none;
+}
+
+.font-heading {
+  font-family: $header-font-family;
+}
+.font-body {
+  font-family: $body-font-family;
+}
+.lowercase {
+  text-transform: lowercase;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+.capitalize {
+  text-transform: capitalize;
+}
+.underline {
+  text-decoration: underline;
+}
+.circle {
+  border-radius: 50%;
+}
+.h-fill {
+  height: 100%;
+}
+.w-fill {
+  width: 100%;
+}
+.h-half {
+  height: 50%;
+}
+.w-half {
+  width: 50%;
+}
+.fill {
+  width: 100%;
+  height: 100%;
+}
+.text-center {
+  text-align: center;
+  &--large {
+    @include breakpoint(large) {
+      text-align: center;
+    }
+  }
+}
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+.mr-auto {
+  margin-right: auto;
+}
+.ml-auto {
+  margin-left: auto;
+}
+.mt-auto {
+  margin-top: auto;
+}
+.mb-auto {
+  margin-bottom: auto;
+}
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &--small-only {
+    @include breakpoint(small only) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &--large {
+    @include breakpoint(large) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+.flex-0 {
+  flex: 0;
+}
+.flex-1 {
+  flex: 1;
+}
+.inline-flex-center {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.bg-cover {
+  background-size: cover;
+}
+.no-borderRadius {
+  border-radius: 0;
+}
+.align-baseline {
+  align-items: baseline;
+}
+.bg-scroll {
+  background-attachment: scroll;
+}
+.bg-fixed {
+  background-attachment: fixed;
+}
+.bg-image {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.object-cover {
+  object-fit: cover;
+}
+.object-fill {
+  object-fit: fill;
+}
+.object-contain {
+  object-fit: contain;
+}
+.link-container {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.l-0 {
+  left: 0;
+}
+.r-0 {
+  right: 0;
+}
+.t-0 {
+  top: 0;
+}
+.b-0 {
+  bottom: 0;
+}
+.a-0 {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.bg-transparent {
+  background-color: transparent;
+}
+.max-w-none {
+  max-width: none;
+}
+.img-cover {
+  object-position: center;
+  object-fit: cover;
+}
+.italic {
+  font-style: italic;
+}
+.align-items-start {
+  align-items: flex-start;
+}
+.align-items-end {
+  align-items: flex-end;
+
+  &--medium {
+    @include breakpoint(medium) {
+      align-items: flex-end;
+    }
+  }
+}
+.no-pointer {
+  pointer-events: none;
+}
+.all-pointer {
+  pointer-events: all;
+}
+.lh-1 {
+  line-height: 1;
+}
+.minh-100vh {
+  min-height: 100vh;
+}
+.overflow-hidden {
+  overflow: hidden;
+}
+.z {
+  @for $i from -1 through 10 {
+    &-#{$i} {
+      z-index: $i;
+    }
+  }
+}
+.abs-fill {
+  &,
+  &--before::before,
+  &--after::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.abs-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hide-while-paused {
+  display: none !important;
+}
+
+.playing {
+  .hide-while-playing {
+    display: none !important;
+  }
+
+  .hide-while-paused {
+    display: block !important;
+  }
+}
+
+.fullscreen {
+  display: block !important;
+}
+
+.space-nowrap {
+  white-space: nowrap;
+}
+
+.hideAllowOverflow,
+.hideAllowOverflowX,
+.hideAllowOverflowY {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+  &::-webkit-scrollbar {
+    /* WebKit */
+    width: 0;
+    height: 0;
+  }
+}
+
+.custom-underline {
+  &::after {
+    content: "";
+    height: 0;
+    width: 95%;
+    position: relative;
+    transition: border-color $timing;
+    margin-top: rem-calc(3);
+    border-bottom: 1px solid currentColor;
+  }
+}
+
+.order-first--small-only {
+  @include breakpoint(small only) {
+    order: -1;
+  }
+}
+
+.order-first--until-large {
+  order: -1;
+
+  @include breakpoint(large) {
+    order: 0;
+  }
+}
+
+.text-right--large {
+  @include breakpoint(large) {
+    text-align: right;
+  }
+}
+
+.hideAllowOverflow {
+  overflow: scroll;
+}
+
+.hideAllowOverflowX {
+  overflow-x: scroll;
+}
+
+.hideAllowOverflowY {
+  overflow-y: scroll;
+}
+
+// .cell-shadow {
+//   @include hover-shadow(
+//     $shadow: rem-calc(0 10 30) rgba(18, 57, 95, 0.3),
+//     $transition: all 0.45s cubic-bezier(0.165, 0.84, 0.44, 1)
+//   );
+// }
+
+// Text size with number corresponding to px
+// .text-16, .text-80
+@for $i from 1 through 72 {
+  .text-#{$i} {
+    font-size: rem-calc($i);
+  }
+}
+
+// Font weights
+// .weight-bold
+@each $weight
+  in 100
+  200
+  300
+  400
+  500
+  600
+  700
+  800
+  900
+  normal
+  lighter
+  bold
+  bolder
+  inherit
+  initial
+  unset
+{
+  .weight-#{$weight} {
+    font-weight: $weight;
+  }
+}
+
+// Add some display styles.
+// ex: .inline-block
+@each $display
+  in none
+  block
+  inline-block
+  flex
+  inline-flex
+  grid
+  table
+  table-row
+  table-cell
+{
+  .display-#{$display} {
+    display: $display;
+  }
+}
+
+// Flex wrap
+// .flex-wrap
+@each $wrap in nowrap wrap wrap-reverse {
+  .flex-#{$wrap} {
+    flex-wrap: $wrap;
+  }
+}
+
+// Text colors
+// .text-primary
+@each $name, $color in $foundation-palette {
+  .text-#{$name} {
+    color: $color;
+  }
+}
+
+// Background colors
+// .bg-primary
+@each $name, $color in $foundation-palette {
+  .bg-#{$name} {
+    background-color: $color;
+  }
+}
+
+// Add positions
+// .static
+@each $pos in static fixed absolute relative sticky {
+  .#{$pos} {
+    position: $pos;
+  }
+}
+
+// Content positioning along main / cross axis
+// .justify-end
+@each $type in justify, align {
+  @each $pos in start center end around between evenly {
+    .#{$type}-#{$pos} {
+      @if ($pos == start or $pos == end) {
+        #{$type}-content: flex-#{$pos};
+      }
+      @elseif ($pos == around or $pos == between or $pos == evenly) {
+        #{$type}-content: space-#{$pos};
+      } @else {
+        #{$type}-content: $pos;
+      }
+    }
+  }
+}
+
+.justify-end--medium {
+  @include breakpoint(medium) {
+    justify-content: flex-end;
+  }
+}
+
+// Box shadow colored overlay, 5% - 95%
+// .overlay-primary-60 (60% opacity on primary color)
+.overlay {
+  @for $i from 1 through 19 {
+    $mod: $i * 5;
+
+    @each $name, $color in $foundation-palette {
+      &-#{$name}-#{$mod} {
+        box-shadow: inset 0 0 0 5000px rgba($color, $mod * 0.01);
+      }
+    }
+  }
+}
+
+.border {
+  @for $i from 1 through 2 {
+    @each $name, $color in $foundation-palette {
+      //   &-b-#{$name}-#{$i} {
+      //     border-bottom: $i * 1px solid $color;
+      //   }
+
+      // &-l-#{$name}-#{$i} {
+      //   border-left: $i * 1px solid $color;
+      // }
+
+      // &-r-#{$name}-#{$i} {
+      //   border-right: $i * 1px solid $color;
+      // }
+    }
+
+    // @each $name, $color in $foundation-palette {
+    //   &-y-#{$name}-#{$i} {
+    //     border-top: $i * 1px solid $color;
+    //     border-bottom: $i * 1px solid $color;
+    //   }
+
+    //   &-x-#{$name}-#{$i} {
+    //     border-left: $i * 1px solid $color;
+    //     border-right: $i * 1px solid $color;
+    //   }
+    // }
+
+    @each $name, $color in $foundation-palette {
+      &-#{$name}-#{$i} {
+        border: $i * 1px solid $color;
+      }
+
+      &-l-#{$name}-#{$i} {
+        border-left: $i * 1px solid $color;
+      }
+
+      &-t-#{$name}-#{$i} {
+        border-top: $i * 1px solid $color;
+      }
+
+      &-r-#{$name}-#{$i} {
+        border-right: $i * 1px solid $color;
+      }
+    }
+  }
+
+  &-t-none {
+    border-top: none;
+  }
+}
+
+@for $i from 21 to 0 {
+  @each $spacer in height width {
+    @include b(#{$spacer}-#{$i}) {
+      #{$spacer}: $i * 5%;
+      @each $breakpoint-name, $breakpoint in $breakpoints {
+        @include m(#{$breakpoint-name}) {
+          @include breakpoint(#{$breakpoint-name}) {
+            #{$spacer}: $i * 5%;
+          }
+        }
+      }
+    }
+    @include b(min-#{$spacer}-#{$i}) {
+      min-#{$spacer}: $i * 5%;
+      @each $breakpoint-name, $breakpoint in $breakpoints {
+        @include m(#{$breakpoint-name}) {
+          @include breakpoint(#{$breakpoint-name}) {
+            min-#{$spacer}: $i * 5%;
+          }
+        }
+      }
+    }
+    @include b(max-#{$spacer}-#{$i}) {
+      max-#{$spacer}: $i * 5%;
+      @each $breakpoint-name, $breakpoint in $breakpoints {
+        @include m(#{$breakpoint-name}) {
+          @include breakpoint(#{$breakpoint-name}) {
+            max-#{$spacer}: $i * 5%;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Flex direction
+// .flex-col
+@each $dir in row row-reverse column column-reverse {
+  .flex-#{$dir} {
+    flex-direction: $dir;
+  }
+}
+
+// Text line-height. This targets child <p> tags and is stepped in increments of .25
+// ex: .line-18 (same as line-height: 4.5)
+// @for $i from 0 through 20 {
+//   .line-#{$i} {
+//     line-height: ($i * .25);
+//     p {line-height: inherit}
+//   }
+// }
+
+// Text letter-spacing. This targets child <p> tags and is stepped in increments of 1px
+// ex: .letter-2
+// @for $i from 0 through 10 {
+//   .letter-#{$i} {
+//     letter-spacing: ($i * 1px);
+//     p {letter-spacing: inherit}
+//   }
+// }
+
+// Padding & Margin convenience styles ex: .px-2, .mb-4 etc
+$spacing-step: 0.5 !default;
+$spacing-step-count: 40 !default;
+
+@include spacing(padding, $spacing-step, $spacing-step-count);
+@include spacing(margin, $spacing-step, $spacing-step-count);
+
+// @each $mode in normal multiply screen overlay darken lighten
+// color-dodge color-burn hard-light soft-light difference
+// exclusion hue saturation color luminosity {
+//   .bg-blend-#{$mode} {
+//     background-blend-mode: $mode;
+//   }
+// }
+
+.curve {
+  position: relative;
+  margin-top: -1px;
+
+  &__block {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    line-height: 0;
+
+    > svg {
+      width: 100%;
+      height: 3vw;
+      fill: currentColor;
+      margin-bottom: -1px;
+    }
+  }
+
+  // add a block section below the curve (leading to the next section), giving the illusion of the current section contents spilling into the next.
+  // ex: .curve.curve--push-5
+  @for $i from 1 through 30 {
+    &--push-#{$i} .curve__block {
+      border-bottom: ($i * 1rem) solid currentColor;
+    }
+  }
+}
+
+.section {
+  // Push higher sibling section forward of the section below it
+  // .section--top
+  &--top {
+    position: relative;
+    z-index: 10;
+  }
+}
+
+.my-auto {
+  margin-top: auto;
+  margin-bottom: auto;
+}

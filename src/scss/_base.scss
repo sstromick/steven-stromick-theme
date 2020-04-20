@@ -1,0 +1,44 @@
+/*=Base
+---------------------------------------------------------------------*/
+
+$global-font-size-scaled: $global-font-size !default;
+html {
+  font-size: $global-font-size-scaled * 0.65;
+  @include breakpoint(medium up) {
+    font-size: $global-font-size-scaled * 0.8;
+  }
+  @include breakpoint(large up) {
+    font-size: $global-font-size-scaled * 0.9;
+  }
+  @include breakpoint(xlarge up) {
+    font-size: $global-font-size-scaled;
+  }
+}
+
+*:focus {
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  > svg {
+    pointer-events: none;
+  }
+}
+
+hr {
+  display: block;
+  margin: 1em 0;
+  padding: 0;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+}
+
+p,
+ul,
+li {
+  font-size: 1.2rem;
+}

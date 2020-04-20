@@ -1,0 +1,11 @@
+/*=Header
+---------------------------------------------------------------------*/
+.site-header {
+  position: relative;
+  display: flex;
+  background-color: $black;
+  padding: 1rem 3rem;
+  color: $light-gray;
+  justify-content: space-between;
+  align-items: center;
+}
